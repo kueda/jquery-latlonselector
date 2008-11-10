@@ -1,0 +1,8 @@
+jQuery latLonSelector is a form widget for selecting latitude and longitude.  It will display a map below matched inputs on focus and fill in lat/lon for any inputs in the same form named "latitude" and "longitutde."
+
+Usage:
+  $('#some_text_input').latLonSelector();
+
+Requirements:
+  jQuery
+  Google Maps

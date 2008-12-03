@@ -1,6 +1,5 @@
 (function($){
   $.fn.latLonSelector = function(options) {
-    // console.log("You might have to uncomment this to force FireBug to load...");
     var options = $.extend({}, $.fn.latLonSelector.defaults, options);
     
     // Insert a SINGLE map div at the bottom of the page
@@ -217,7 +216,8 @@
       try {
         return console.log.apply(null, arguments);
       } catch(e) {
-        alert.apply("An error occurred while logging an error: ", e);
+        alert.apply("An error occurred while logging an error.  This was " + 
+                    "too meta to handle so I crashed: ", e);
       };
     } else {
       alert("Console not defined!");
@@ -301,7 +301,6 @@
   
   function setExact(isExact) {
     if (typeof(isExact) == 'undefined') {
-      logMessage("DEBUG: isExact undefined.  Setting to true...");
       var isExact = true;
     };
     
@@ -379,8 +378,6 @@
     setExact(isExact);
     
     // Set the map'ss scale
-    logMessage('DEBUG: scaleField: ', scaleField);
-    logMessage('DEBUG: $(scaleField).val(): ', $(scaleField).val());
     var scale;
     if ($(scaleField).val() != '') {
       var scale = parseInt($(scaleField).val());
@@ -397,10 +394,7 @@
     }
     
     // Move the map above the input if necessary
-    // logMessage("DEBUG: $(map).position().top + $(map).outerHeight(): ", $(map).position().top + $(map).outerHeight());
-    // logMessage("DEBUG: $(window).height(): ", $(window).height());
     // if (($(map).position().top + $(map).outerHeight()) > $(window).height()) {
-    //   logMessage("DEBUG: Moving map above the input...");
     //   $(map).css({
     //     top: $(input).offset().top - $(map).outerHeight()
     //   });

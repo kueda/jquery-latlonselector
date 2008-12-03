@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <title>jQuery latLonSelector Example</title>
+    <!-- You'll need to insert a working GMaps key here.  This one's for localhost -->
+    <script src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" charset="utf-8">
+      google.load('jquery', '1');
+      google.load("maps", "2");
+    </script>
+    <script src="jquery.latLonSelector.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $('#place_name').latLonSelector();
+      });
+    </script>
+  </head>
+  <body>
+    <h1>jQuery latLonSelector Example</h1>
+    <form action="example_submit" method="get" accept-charset="utf-8">
+      <div style="width: 300px; float: left">
+        <label for="place_name">Place Name</label>
+        <input type="text" name="place_name" value="" id="place_name" style="width: 300px">
+      </div>
+      <div style="width: 300px; float: left">
+        <p>
+          <label for="latitude">Latitude</label>
+          <input type="text" name="latitude" value="" id="latitude">
+        </p>
+
+        <p>
+          <label for="longitude">Longitude</label>
+          <input type="text" name="longitude" value="" id="longitude">
+        </p>
+
+        <p>
+          <label for="map_scale">Map Scale</label>
+          <input type="text" name="map_scale" value="" id="map_scale">
+        </p>
+      
+        <p>
+          <input type="checkbox" name="location_is_exact" value="" id="location_is_exact">
+          <label for="location_is_exact">Exact Location</label>
+        </p>
+      </div>
+    </form>
+  </body>
+</html>

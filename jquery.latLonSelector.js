@@ -377,11 +377,11 @@
     };
     
     // Get marker, exact or approx based on exactField
-    var isExact = $(exactField).val() == 'true';
+    var isExact = $(exactField).get(0).checked == true;
     var marker = getMarker({exact: isExact});
     setExact(isExact);
     
-    // Set the map'ss scale
+    // Set the map's scale
     var scale;
     if ($(scaleField).val() != '') {
       var scale = parseInt($(scaleField).val());

@@ -309,7 +309,7 @@
     $('#latLonSelector').find(
       '#latLonSelectorExactFlag').get(0).checked = isExact;
     
-    // Updat the form
+    // Update the form
     $.fn.latLonSelector.updateFormExact(isExact);
     
     return false;
@@ -343,7 +343,7 @@
     var isExact = isExact || $('#latLonSelector').find(
                               '#latLonSelectorExactFlag:checked').length == 1;
     var locExactField = findFormField(input, 'location_is_exact');
-    $(locExactField).val(isExact);
+    $(locExactField).get(0).checked = isExact;
   };
   
   $.fn.latLonSelector.showMap = function(input) {

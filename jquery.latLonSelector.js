@@ -1,19 +1,19 @@
 (function($){
   $.fn.latLonSelector = function(options) {
     var options = $.extend({}, $.fn.latLonSelector.defaults, options);
+    $.fn.latLonSelector._options = options;
     
-    // Insert a SINGLE map div at the bottom of the page
-    var mapDiv = $('<div id="latLonSelectorMap"></div>');
-    $(mapDiv).text('i am a map!');
-    $(mapDiv).css(options.mapCSS);
-    $('body').append(mapDiv);
-    
-    // Wrap it
-    $(mapDiv).wrap('<div id="latLonSelector"></div>');
-    var wrapper = $(mapDiv).parent();
-    
-    // Style the wrapper
+    // Insert a SINGLE map div at the bottom of the page    
+    var wrapper = $('<div id="latLonSelector"></div>');
+    if (typeof(options.mapDiv) == 'undefined') {
+      var mapDiv = $('<div></div>').css(options.mapCSS);
+      $(wrapper).append(mapDiv);
+    } else {
+      var mapDiv = options.mapDiv;
+    }
     $(wrapper).css(options.wrapperCSS);
+    $(mapDiv).addClass('latLonSelectorMap');
+    $('body').append(wrapper);
     
     // Insert controls
     var controls = $('<div id="latLonSelectorControls"></div>');
@@ -120,7 +120,8 @@
     // Insert the data controls
     var dataControls = $('<div id="latLonSelectorDataControls"></div>');
     $(dataControls).css({
-      'color': '#888'
+      color: '#888',
+      clear: 'left'
     });
     $(dataControls).append(
       $('<input id="latLonSelectorExactFlag" type="checkbox"/>').click(
@@ -346,6 +347,7 @@
   };
   
   $.fn.latLonSelector.showMap = function(input) {
+    console.log("DEBUG: Fired showMap");
     var wrapper = $('#latLonSelector');
     var latField = findFormField(input, 'latitude');
     var lonField = findFormField(input, 'longitude');
@@ -361,16 +363,20 @@
       width: $(input).innerWidth()
     });
     
-    $(mapDiv).css({
-      width: $(input).innerWidth(),
-      height: $(input).innerWidth()
-    });
+    // If not container, move the map
+    if (typeof($.fn.latLonSelector._options.mapDiv) == 'undefined') {
+
+      $(mapDiv).css({
+        width: $(input).innerWidth(),
+        height: $(input).innerWidth()
+      });
+
+      // Notify Google
+      $.fn.latLonSelector._map.checkResize();
+    };
     
     // Show it
     $(wrapper).fadeIn();
-    
-    // Notify Google
-    $.fn.latLonSelector._map.checkResize();
     
     // Get marker, exact or approx based on exactField
     var isExact = $(exactField).val() == 'true';
@@ -491,4 +497,10 @@
     },
     closeText: '&times;'
   };
+  $.fn.latLonSelector.defaults.containedWrapperCSS = $.extend({},
+    $.fn.latLonSelector.defaults.wrapperCSS, {
+      display: 'block',
+      position: 'static'
+    }
+  );
 })(jQuery);

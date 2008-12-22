@@ -347,7 +347,6 @@
   };
   
   $.fn.latLonSelector.showMap = function(input) {
-    console.log("DEBUG: Fired showMap");
     var wrapper = $('#latLonSelector');
     var latField = findFormField(input, 'latitude');
     var lonField = findFormField(input, 'longitude');
@@ -363,9 +362,11 @@
       width: $(input).innerWidth()
     });
     
+    // Show it
+    $(wrapper).fadeIn();
+    
     // If not container, move the map
     if (typeof($.fn.latLonSelector._options.mapDiv) == 'undefined') {
-
       $(mapDiv).css({
         width: $(input).innerWidth(),
         height: $(input).innerWidth()
@@ -374,9 +375,6 @@
       // Notify Google
       $.fn.latLonSelector._map.checkResize();
     };
-    
-    // Show it
-    $(wrapper).fadeIn();
     
     // Get marker, exact or approx based on exactField
     var isExact = $(exactField).val() == 'true';
